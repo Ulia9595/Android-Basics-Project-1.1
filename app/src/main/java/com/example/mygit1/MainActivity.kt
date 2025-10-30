@@ -1,13 +1,17 @@
 package com.example.mygit1
 
+import android.graphics.Paint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle.Companion.auto
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -15,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -34,8 +39,9 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     GreetingImage(
-                        stringResource(R.string.happy_birthday_text),
-                        stringResource(R.string.signature_text)
+                        stringResource(R.string.header),
+                        stringResource(R.string.subparagraph_f),
+                        stringResource(R.string.subparagraph_s)
                     )
                 }
             }
@@ -44,46 +50,52 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun GreetingText(message: String, from: String, modifier: Modifier = Modifier) {
+fun GreetingText(header: String, subparagraph_f: String, subparagraph_s: String, modifier: Modifier = Modifier) {
     Column(
-        verticalArrangement = Arrangement.Center,
-        modifier = modifier
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.Start,
+        modifier = modifier.background(Color.White)
     ) {
         Text(
-            text = message,
-            fontSize = 100.sp,
-            lineHeight = 116.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(top = 16.dp)
+            text = header,
+            fontSize = 24.sp,
+            textAlign = TextAlign.Left,
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
         )
         Text(
-            text = from,
-            fontSize = 36.sp,
+            text = subparagraph_f,
+            textAlign = TextAlign.Justify,
             modifier = Modifier
-                .padding(top = 16.dp)
-                .padding(end = 16.dp)
-                .align(alignment = Alignment.End)
-
+                .padding(start = 16.dp, end = 16.dp)
+                .fillMaxWidth()
+        )
+        Text(
+            text = subparagraph_s,
+            textAlign = TextAlign.Justify,
+            modifier = Modifier
+                .padding(16.dp)
         )
     }
 }
 
 @Composable
-fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) {
-    Box(modifier) {
+fun GreetingImage(header: String, subparagraph_f: String, subparagraph_s: String, modifier: Modifier = Modifier) {
+    Column(modifier = Modifier.fillMaxSize().fillMaxWidth()) {
         Image(
-            painter = painterResource(id = R.drawable.androidparty),
+            painter = painterResource(id = R.drawable.bg_compose_background),
             contentDescription = null,
             contentScale = ContentScale.Crop,
-            alpha = 0.5F,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .weight(1f)
         )
         GreetingText(
-            message = message,
-            from = from,
+            header = header,
+            subparagraph_f = subparagraph_f,
+            subparagraph_s = subparagraph_s,
             modifier = Modifier
-                .fillMaxSize()
-                .padding(8.dp)
+                .weight(3f)
         )
     }
 }
@@ -93,8 +105,9 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
 private fun BirthdayCardPreview() {
     MyGit1Theme {
         GreetingImage(
-            stringResource(R.string.happy_birthday_text),
-            stringResource(R.string.signature_text)
+            stringResource(R.string.header),
+            stringResource(R.string.subparagraph_f),
+            subparagraph_s = stringResource(R.string.subparagraph_s)
         )
     }
 }
