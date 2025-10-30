@@ -39,9 +39,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     GreetingImage(
-                        stringResource(R.string.header),
-                        stringResource(R.string.subparagraph_f),
-                        stringResource(R.string.subparagraph_s)
+                        stringResource(R.string.tasks_completed),
+                        stringResource(R.string.nice)
                     )
                 }
             }
@@ -50,64 +49,63 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun GreetingText(header: String, subparagraph_f: String, subparagraph_s: String, modifier: Modifier = Modifier) {
+fun GreetingText(header_1: String, header_2: String, modifier: Modifier = Modifier) {
     Column(
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.Start,
-        modifier = modifier.background(Color.White)
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
     ) {
         Text(
-            text = header,
+            text = header_1,
             fontSize = 24.sp,
-            textAlign = TextAlign.Left,
+            textAlign = TextAlign.Center,
             modifier = Modifier
-                .padding(16.dp)
+                .padding(start = 24.dp, end = 8.dp)
                 .fillMaxWidth()
         )
         Text(
-            text = subparagraph_f,
-            textAlign = TextAlign.Justify,
+            text = header_2,
+            fontSize = 16.sp,
+            textAlign = TextAlign.Center,
             modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp)
                 .fillMaxWidth()
-        )
-        Text(
-            text = subparagraph_s,
-            textAlign = TextAlign.Justify,
-            modifier = Modifier
-                .padding(16.dp)
         )
     }
 }
 
 @Composable
-fun GreetingImage(header: String, subparagraph_f: String, subparagraph_s: String, modifier: Modifier = Modifier) {
-    Column(modifier = Modifier.fillMaxSize().fillMaxWidth()) {
+fun GreetingImage(header_1: String, header_2: String, modifier: Modifier = Modifier) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Image(
-            painter = painterResource(id = R.drawable.bg_compose_background),
+            painter = painterResource(id = R.drawable.ic_task_completed),
             contentDescription = null,
-            contentScale = ContentScale.Crop,
+            contentScale = ContentScale.Fit,
             modifier = Modifier
-                .weight(1f)
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally)
         )
         GreetingText(
-            header = header,
-            subparagraph_f = subparagraph_f,
-            subparagraph_s = subparagraph_s,
+            header_1 = header_1,
+            header_2 = header_2,
             modifier = Modifier
-                .weight(3f)
+                .fillMaxWidth()
         )
     }
 }
 
 @Preview(showBackground = false)
 @Composable
-private fun BirthdayCardPreview() {
+private fun TaskCompletedPreview() {
     MyGit1Theme {
         GreetingImage(
-            stringResource(R.string.header),
-            stringResource(R.string.subparagraph_f),
-            subparagraph_s = stringResource(R.string.subparagraph_s)
+            stringResource(R.string.tasks_completed),
+            stringResource(R.string.nice)
         )
     }
 }
